@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+:root {
+  --bg-color: #050505;
+  --card-bg: rgba(20, 20, 20, 0.45);
+  --text-primary: #ffffff;
+  --text-secondary: #b3b3b3;
+  --accent: #ff0000; /* YouTube Music Red */
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  overflow: hidden; /* Hide main scrollbars for the wall */
+}
+
+/* Hide default cursor to use our custom React animated cursor */
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}
+
+/* Custom Infinite Scrolling Animations */
+.scroll-up { animation: scrollUp 45s linear infinite; }
+.scroll-down { animation: scrollDown 45s linear infinite; }
+
+@keyframes scrollUp {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+@keyframes scrollDown {
+  0% { transform: translateY(-50%); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes ambientPulse {
+  0% { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.1) translate(-2%, 2%); }
+}
