@@ -18,6 +18,8 @@ export default function Home() {
   const [activeSearchTerm, setActiveSearchTerm] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isVibesOpen, setIsVibesOpen] = useState(false);
+  const [showApiModal, setShowApiModal] = useState(false);
+  const [apiKeyInput, setApiKeyInput] = useState('');
 
   useEffect(() => {
     // Handle resizing columns based on screen width
@@ -33,11 +35,20 @@ export default function Home() {
     setLoading(true);
     setError('');
     try {
+      const headers: HeadersInit = {};
+      const localKey = localStorage.getItem('youtube_api_key');
+      if (localKey) headers['x-youtube-api-key'] = localKey;
+
       const url = query ? `/api/charts?q=${encodeURIComponent(query)}` : '/api/charts';
-      const res = await fetch(url);
+      const res = await fetch(url, { headers });
       const data = await res.json();
       
       if (data.error) {
+        if (data.error.includes('Missing YOUTUBE_API_KEY')) {
+          setShowApiModal(true);
+          setLoading(false);
+          return;
+        }
         setError(data.error);
         if (query) setTracks([]); // Clear previous tracks if search fails
       } else if (data.tracks) {
@@ -108,14 +119,20 @@ export default function Home() {
   if (error && tracks.length === 0) {
     return (
       <div className="h-screen w-screen flex flex-col items-center justify-center text-white bg-black p-8 text-center">
-        <div className="text-red-500 font-bold text-3xl mb-4">API Error</div>
+        <div className="text-red-500 font-bold text-3xl mb-4">Error</div>
         <div className="text-gray-300 text-lg">{error}</div>
-        <div className="mt-8 text-sm text-gray-500 max-w-lg">
-          Please open <code>e:\Afosity Music\.env.local</code> and set your <code>YOUTUBE_API_KEY</code>.
-        </div>
+        <button onClick={() => window.location.reload()} className="mt-8 px-6 py-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors">Try Again</button>
       </div>
     );
   }
+
+  const handleSaveApiKey = () => {
+    if (apiKeyInput.trim()) {
+      localStorage.setItem('youtube_api_key', apiKeyInput.trim());
+      setShowApiModal(false);
+      window.location.reload();
+    }
+  };
 
   return (
     <main className="relative w-screen h-screen overflow-hidden text-white">
@@ -308,6 +325,43 @@ export default function Home() {
         onNext={handleNextTrack}
         onPrev={handlePrevTrack}
       />
+
+      {/* API Key Modal */}
+      {showApiModal && (
+        <div className="absolute inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+          <div className="bg-[#111] border border-white/10 p-8 rounded-2xl max-w-md w-full shadow-[0_0_50px_rgba(255,0,0,0.1)]">
+            <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+              <Sparkles className="text-red-500" /> API Key Required
+            </h2>
+            <p className="text-gray-400 text-sm mb-6">
+              To use Afosity Music locally, you need to provide your own YouTube Data API v3 key. Your key is stored securely in your browser's local storage.
+            </p>
+            <input 
+              type="text" 
+              placeholder="Enter your API Key (AIzaSy...)" 
+              value={apiKeyInput}
+              onChange={(e) => setApiKeyInput(e.target.value)}
+              className="w-full bg-black/50 border border-white/10 rounded-lg p-3 text-white mb-4 outline-none focus:border-red-500 transition-colors"
+            />
+            <div className="flex justify-end gap-3">
+              <a 
+                href="https://console.cloud.google.com/apis/library/youtube.googleapis.com" 
+                target="_blank" 
+                rel="noreferrer"
+                className="px-4 py-2 text-sm text-gray-400 hover:text-white transition-colors flex items-center"
+              >
+                Get a Key
+              </a>
+              <button 
+                onClick={handleSaveApiKey}
+                className="bg-red-600 hover:bg-red-500 text-white px-6 py-2 rounded-lg font-semibold transition-colors"
+              >
+                Save & Continue
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }

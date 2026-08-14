@@ -156,30 +156,29 @@ A custom animated cursor that replaces the browser default, adding a premium fee
 
 ## 6. Feature Changelog
 
-| Version | Date | Changes |
+| Date | Feature | Description |
 |---|---|---|
-| `1.0.0` | 2026-08-14 | Initial build: grid wall, full-screen player, synced lyrics, vibes, explore sidebar |
-| `1.1.0` | 2026-08-15 | Added minimized player bar with Play/Pause, Next, Prev controls. Added Minimize/Expand buttons to fullscreen player. Added `handlePlayTrack`, `handleNextTrack`, `handlePrevTrack` to page. |
+| Aug 14, 2026 | **Portable API Key** | Added a UI modal to accept and save a custom YouTube Data API v3 key to local storage. API routes now accept `x-youtube-api-key` header to allow cloned repos to run out-of-the-box. |
+| Aug 15, 2026 | **Minimized Audio Player** | Redesigned the Audio Player to support a sleek bottom bar mode. Added `isPlayerMinimized` global state. Re-implemented track navigation logic (`Next` / `Prev` / `Play` / `Pause`) directly into the player interface. |
+| Aug 16, 2026 | **Documentation Updates** | Updated report to reflect Portable API Key integration and updated project versioning. |
 
 ---
 
 ## 7. Feature Status
 
-| Feature | Status |
-|---|---|
-| Animated infinite-scroll track grid | ✅ |
-| Full-screen immersive audio player | ✅ |
-| Time-synced LRC lyrics (karaoke-style) | ✅ |
-| Procedural generative background | ✅ |
-| Minimized player bar (persistent playback) | ✅ |
-| Play / Pause / Previous / Next controls | ✅ |
-| Search by song or artist | ✅ |
-| Vibe-based AI mood search | ✅ |
-| Explore sidebar (trending) | ✅ |
-| Custom animated cursor | ✅ |
-| YouTube official video embedded | ✅ |
-| Responsive layout | ✅ |
-| Privacy-friendly YouTube embed (`youtube-nocookie.com`) | ✅ |
+| Feature | Status | Notes |
+|---|---|---|
+| Search | ✅ Active | Real-time querying against YouTube Music API. |
+| Explore / Trending | ✅ Active | Discovers trending music and popular playlists. |
+| Audio Player (Fullscreen) | ✅ Active | YouTube iframe embedding with synchronized lyrics. |
+| Audio Player (Minimized) | ✅ Active | Persists playback across navigation with bottom bar controls. |
+| Portable API Key | ✅ Active | Users can input their own API key via the UI to use the app locally. |
+| Lyrics Sync | ✅ Active | Polling at 5fps to sync transcripts with video current time. |
+| Vibes Generator | ✅ Active | Modal with mood-based suggestions. |
+| Custom animated cursor | ✅ | |
+| YouTube official video embedded | ✅ | |
+| Responsive layout | ✅ | |
+| Privacy-friendly YouTube embed (`youtube-nocookie.com`) | ✅ | |
 
 ---
 

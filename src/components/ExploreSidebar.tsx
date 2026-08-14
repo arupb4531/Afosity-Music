@@ -15,7 +15,11 @@ export default function ExploreSidebar({ onPlayTrack }: ExploreSidebarProps) {
   useEffect(() => {
     const fetchExploreData = async () => {
       try {
-        const res = await fetch('/api/explore');
+        const headers: HeadersInit = {};
+        const localKey = localStorage.getItem('youtube_api_key');
+        if (localKey) headers['x-youtube-api-key'] = localKey;
+
+        const res = await fetch('/api/explore', { headers });
         const data = await res.json();
         
         if (data.trending) setTrending(data.trending);

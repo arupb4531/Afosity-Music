@@ -2,11 +2,12 @@ import { NextResponse } from 'next/server';
 
 export async function GET(request: Request) {
   try {
-    const API_KEY = process.env.YOUTUBE_API_KEY;
+    const customApiKey = request.headers.get('x-youtube-api-key');
+    const API_KEY = customApiKey || process.env.YOUTUBE_API_KEY;
     
     if (!API_KEY) {
       return NextResponse.json(
-        { error: 'Missing YOUTUBE_API_KEY in .env.local' },
+        { error: 'Missing YOUTUBE_API_KEY in .env.local or headers' },
         { status: 500 }
       );
     }
