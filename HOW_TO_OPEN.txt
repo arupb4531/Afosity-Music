@@ -1,0 +1,37 @@
+=============================================================
+              HOW TO OPEN AFOSITY MUSIC
+=============================================================
+
+If you downloaded this from GitHub, follow these simple steps to run it on your device.
+
+STEP 1: INSTALL NODE.JS (Required)
+-------------------------------------------------------------
+This app requires a program called "Node.js" to run.
+1. Go to https://nodejs.org/
+2. Download the recommended version (LTS).
+3. Install it like a normal program (keep clicking Next).
+* Note: You only need to do this once.
+
+STEP 2: RUN THE APP
+-------------------------------------------------------------
+FOR WINDOWS USERS:
+1. Open the folder where you downloaded and extracted this project.
+2. Double-click the file named "Start Afosity Music.bat".
+3. A black window will open. The first time you run it, it might take a minute or two to download required files.
+4. It will automatically open the website in your browser!
+(Keep the black window open while using the app. Close it when you're done.)
+
+FOR MAC USERS:
+1. Open the folder where you downloaded and extracted this project.
+2. Double-click the file named "Start Afosity Music (Mac).command".
+   - If it says "cannot be opened because it is from an unidentified developer":
+     Right-click (or Control-click) the file, then click "Open", and click "Open" again.
+3. The terminal will open. The first time, it might take a minute to download files.
+4. It will automatically open the website in your browser!
+(Keep the terminal window open while using the app. Close it when you're done.)
+
+STEP 3: TROUBLESHOOTING
+-------------------------------------------------------------
+- If the browser doesn't open automatically, wait a few seconds and go to this link in your web browser: http://localhost:3001
+- If you see an error saying "npm is not recognized" or "Node.js is not installed", make sure you completed STEP 1 and try restarting your computer so the changes take effect.
+- If it says "permission denied" on Mac, open Terminal, type "chmod +x " (with a space at the end), drag the .command file into the terminal, hit Enter, and then double-click the file again.

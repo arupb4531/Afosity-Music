@@ -160,6 +160,7 @@ A custom animated cursor that replaces the browser default, adding a premium fee
 |---|---|---|
 | Aug 14, 2026 | **Portable API Key** | Added a UI modal to accept and save a custom YouTube Data API v3 key to local storage. API routes now accept `x-youtube-api-key` header to allow cloned repos to run out-of-the-box. |
 | Aug 15, 2026 | **Minimized Audio Player** | Redesigned the Audio Player to support a sleek bottom bar mode. Added `isPlayerMinimized` global state. Re-implemented track navigation logic (`Next` / `Prev` / `Play` / `Pause`) directly into the player interface. |
+| Aug 15, 2026 | **Easy Startup Scripts** | Added Mac setup script (`.command`), a `HOW_TO_OPEN.txt` guide, and updated the Windows `.bat` script to automatically check for Node.js, making the app easier to run for non-technical users. |
 | Aug 16, 2026 | **Documentation Updates** | Updated report to reflect Portable API Key integration and updated project versioning. |
 
 ---
@@ -186,8 +187,12 @@ A custom animated cursor that replaces the browser default, adding a premium fee
 
 The app runs locally on `http://localhost:3001`.
 
-**To start:** Double-click `Start Afosity Music.bat` in the project root (`e:\Afosity Music\`).
+**To start:** 
+- **Windows:** Double-click `Start Afosity Music.bat` in the project root (`e:\Afosity Music\`).
+- **Mac:** Double-click `Start Afosity Music (Mac).command`.
+
+*For non-technical users, refer to `HOW_TO_OPEN.txt` for step-by-step instructions.*
 
 **Requirements:**
-- A valid `YOUTUBE_API_KEY` set in `e:\Afosity Music\.env.local`
 - Node.js installed
+- (Optional) A valid `YOUTUBE_API_KEY` set in `e:\Afosity Music\.env.local` if not using the in-app portable key feature.
